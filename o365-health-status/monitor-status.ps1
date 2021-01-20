@@ -11,13 +11,14 @@ Function getStatus(){
 }
 
 Function getStatusJMES(){
-    $workLoads = m365 tenant status list --output json --query "value[?Status != 'ServiceOperational']"
+    $workLoads = m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json  | ConvertFrom-Json
+    $workLoads | ForEach-Object { Write-Output "WorkLoad: $($_.WorkloadDisplayName )"}
 
-    Write-Host $workLoads
 }
 
 #Check the Login Status
 $LoginStatus = m365 status
+
 
 if($LoginStatus -Match "connectedAs:"){
     Write-Host "Connected"
