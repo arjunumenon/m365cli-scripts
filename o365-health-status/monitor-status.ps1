@@ -13,7 +13,7 @@ Function getStatus(){
 Function getStatusJMES(){
     $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
     $listName = "O365 Health Status"
-    $workLoads = m365 tenant status list --query "value[]"  --output json  | ConvertFrom-Json
+    $workLoads = m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json  | ConvertFrom-Json
     $currentOutageServices = (m365 spo listitem list --webUrl $webURL --title $listName --fields "Title, Workload, Id"  --output json).Replace("ID", "_ID") | ConvertFrom-Json
 
     #Updating the status to IsInOutage to NO the list item if the service is back to normal
