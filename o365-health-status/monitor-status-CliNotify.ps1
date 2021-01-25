@@ -1,4 +1,3 @@
-
 #Check the Login Status
 $LoginStatus = m365 status
 
