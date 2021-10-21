@@ -6,6 +6,7 @@ if($LoginStatus -Match "Logged out"){
     exit;    
 }
 
+#Added Comments
 $webURL = "https://aum365.sharepoint.com/sites/M365CLI"
 $listName = "O365 Health Status"
 $workLoads = m365 tenant status list --query "value[?Status != 'ServiceOperational']"  --output json  | ConvertFrom-Json
